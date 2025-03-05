@@ -15,8 +15,8 @@ public class CostCalculator {
         return fuelNeeded() * fuelPrice;
     }
 
-    public void display() {
-        System.out.printf("The cost of driving %.2f km is %.2f€.%n", distance, cost());
+    public String display() {
+        return String.format("The cost of the trip is %.2f€", cost());
     }
 
     public void setDistance(double distance) {

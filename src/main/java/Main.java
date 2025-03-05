@@ -13,7 +13,7 @@ public class Main {
             double fuelPrice = sc.nextDouble();
             costCalculator.setFuelPrice(fuelPrice);
             System.out.println("\nCalculating the cost of the trip...");
-            costCalculator.display();
+            System.out.println(costCalculator.display());
             System.out.print("\nDo you want to calculate the cost of another trip? (y/n) ");
         } while (sc.next().equals("y"));
     }
