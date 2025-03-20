@@ -16,7 +16,7 @@ public class CostCalculator {
     }
 
     public String display() {
-        return String.format("The cost of the trip is %.2f€", cost());
+        return String.format("%.2f€", cost());
     }
 
     public void setDistance(double distance) {

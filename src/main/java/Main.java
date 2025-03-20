@@ -1,20 +1,43 @@
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        Locale locale;
+        ResourceBundle rb;
         CostCalculator costCalculator = new CostCalculator();
-        System.out.println("Welcome to the trip cost calculator!");
+
+        System.out.println("Select the language: ");
+        System.out.println("1. Farsi");
+        System.out.println("2. Finnish");
+        System.out.println("3. Japanese");
+        int choice = sc.nextInt();
+
+        locale = switch (choice) {
+            case 1 -> new Locale("fa", "IR");
+            case 2 -> new Locale("fi", "FI");
+            case 3 -> new Locale("ja", "JP");
+            default -> new Locale("en", "US");
+        };
+
+        try {
+            rb = ResourceBundle.getBundle("messages", locale);
+        } catch (Exception e) {
+            System.out.println("Invalid choice. Defaulting to English.");
+            rb = ResourceBundle.getBundle("messages", new Locale("en", "US"));
+        }
         do {
-            System.out.print("\nEnter the distance in km: ");
+            System.out.print(rb.getString("kilo"));
             double distance = sc.nextDouble();
             costCalculator.setDistance(distance);
-            System.out.print("Enter the fuel price per liter: ");
+            System.out.print(rb.getString("price"));
             double fuelPrice = sc.nextDouble();
             costCalculator.setFuelPrice(fuelPrice);
-            System.out.println("\nCalculating the cost of the trip...");
-            System.out.println(costCalculator.display());
-            System.out.print("\nDo you want to calculate the cost of another trip? (y/n) ");
-        } while (sc.next().equals("y"));
+            System.out.println(rb.getString("total") + costCalculator.display());
+            System.out.println("\n" + rb.getString("new"));
+            System.out.println(rb.getString("answer"));
+        } while (sc.nextInt() == 1);
     }
 }
